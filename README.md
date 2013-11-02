@@ -6,7 +6,7 @@ Script to send files/comments to Evernote by a mail.
 
 # Usage
 
-    ./evernote_mail [-uh] [-f <input file>] [-a <email address>]
+    evernote_mail [-uh] [-f <input file>] [-a <email address>]
                     [-o <other mail address>] [-t <title>] [-T <tag>]
                     [-n <notebook>] message...
     
@@ -35,5 +35,9 @@ Script to send files/comments to Evernote by a mail.
     
     Note: 50 mails can be sent as a standard user.
          250 mails can be sent as a premium user.
+
+# References
+
+* [コマンドラインからEvernoteへ送るスクリプト](http://rcmdnk.github.io/blog/2013/05/23/computer-evernote/)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rcmdnk/evernote_mail/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
