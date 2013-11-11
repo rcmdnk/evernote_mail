@@ -23,6 +23,7 @@ addressother=$def_addressother
 title=$def_title
 tag=$def_tag
 notebook=$def_notebook
+cmd=""
 
 # check evernote setting
 if [ -f ~/.evernote ];then
@@ -37,11 +38,12 @@ if [ -f ~/.evernote ];then
 fi
 
 # help
-HELP="Usage: $0 [-uh] [-f <input file>] [-a <email address>]
+HELP="Usage: $0 [-uh] [-c <command>] [-f <input file>] [-a <email address>]
                 [-o <other mail address>] [-t <title>] [-T <tag>]
                 [-n <notebook>] message...
 
 Arguments:
+      -c  Set mail command (default: email for cygwin, mail for others)
       -u  Send an input file as attachment
           (default: file's content is sent as an inline text)
       -f  Set an input file, in which the contents is sent
@@ -75,9 +77,10 @@ if [ $# -eq 0 ];then
 fi
 
 OPTNUM=0
-while getopts uf:a:o:t:T:n:h OPT;do
+while getopts uf:a:c:o:t:T:n:h OPT;do
   OPTNUM=`expr $OPTNUM + 1`
   case $OPT in
+    "c" ) cmd="$OPTARG" ;;
     "u" ) attach=true ;;
     "f" ) inputfile="$OPTARG" ;;
     "a" ) address="$OPTARG" ;;
@@ -98,6 +101,13 @@ if [ "$address" = "" ];then
 fi
 if [ "$addressother" != "" ];then
   address=${address},${addressother}
+fi
+if [ "$cmd" = "" ];then
+  if [[ "$OSTYPE" =~ "cygwin" ]];then
+    cmd="email"
+  else
+    cmd="mail"
+  fi 
 fi
 
 # Set title if necessary
@@ -122,15 +132,15 @@ fi
 # Check input file and send message
 if $attach;then
   if [ "$inputfile" != "" ];then
-    (echo $message;uuencode $inputfile `basename $inputfile`)|mail -s "$title $notebook $tag" $address
+    (echo $message;uuencode $inputfile `basename $inputfile`)|$cmd -s "$title $notebook $tag" $address
   else
-    (echo $message)|mail -s "$title $notebook $tag" $address
+    (echo $message)|$cmd -s "$title $notebook $tag" $address
   fi
 else
   if [ "$inputfile" != "" ];then
-    (echo $message;cat $inputfile)|mail -s "$title $notebook $tag" $address
+    (echo $message;cat $inputfile)|$cmd -s "$title $notebook $tag" $address
   else
-    (echo $message)|mail -s "$title $notebook $tag" $address
+    (echo $message)|$cmd -s "$title $notebook $tag" $address
   fi
 fi
 
