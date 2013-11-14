@@ -1,15 +1,15 @@
 #!/bin/sh
 scripts=(https://raw.github.com/rcmdnk/evernote_mail/master/bin/evernote_mail)
-if [ $prefx="" ];then
+if [ $prefix = "" ];then
   prefix=/usr/local
 fi
 
 prefix=`echo $prefix|sed 's|--prefix=||'|sed "s|^~|$HOME|"|sed "s|^\.|$(pwd)|"`
 
 echo
-echo "######################"
+echo "###############################################"
 echo "Install to $prefix/bin"
-echo "######################"
+echo "###############################################"
 echo
 sudo=""
 if [ -d $prefix/bin ];then
@@ -29,5 +29,6 @@ fi
 
 for s in ${scripts[@]};do
   sname=`basename $s`
+  echo Intalling ${sname}...
   $sudo curl -fsSL -o $prefix/bin/$sname $s
 done
