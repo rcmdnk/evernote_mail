@@ -5,14 +5,14 @@ Script to send files/comments to Evernote by a mail.
 
 # Introduction
 
-    $ curl -fsSL https://github.com/rcmdnk/evernote_mail/install|sh
+    $ curl -fsSL https://raw.github.com/rcmdnk/evernote_mail/install/install.sh| sh
 
 This will install a script to `/usr/bin`
 and you may be asked root password.
 
 If you want to install other directory, do like:
 
-    $ curl -fsSL https://github.com/rcmdnk/evernote_mail/install| prefix=~/usr/local/ sh
+    $ curl -fsSL https://raw.github.com/rcmdnk/evernote_mail/install/install.sh|  prefix=~/usr/local/ sh
 
 Or, simply download a script and set where you like.
 
