@@ -3,18 +3,41 @@ evernote_mail
 
 Script to send files/comments to Evernote by a mail.
 
-# Introduction
+# Installation
+
+On Mac, you can install scripts by [Homebrew](https://github.com/mxcl/homebrew):
+
+    $ brew tap rcmdnk/rcmdnkpac
+    $ brew install evernote_mail
+
+If you have [brewall](https://github.com/rcmdnk/homebrew-brewall), add following lines to Brewfile:
+
+    tap 'rcmdnk/rcmdnkpac'
+    brew 'evernote_mail'
+
+then, do:
+
+    $ brewall install
+
+Or if you write like:
+
+    tapall 'rcmdnk/rcmdnkpac'
+
+and do `brewall install`, you will have all useful scripts in
+[rcmdnkpac](https://github.com/rcmdnk/homebrew-rcmdnkpac).
+
+You can also use an install script on the web like:
 
     $ curl -fsSL https://raw.github.com/rcmdnk/evernote_mail/install/install.sh| sh
 
-This will install a script to `/usr/bin`
+This will install scripts to `/usr/bin`
 and you may be asked root password.
 
 If you want to install other directory, do like:
 
     $ curl -fsSL https://raw.github.com/rcmdnk/evernote_mail/install/install.sh|  prefix=~/usr/local/ sh
 
-Or, simply download a script and set where you like.
+Or, simply download scripts and set where you like.
 
 # Usage
 
