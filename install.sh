@@ -1,6 +1,6 @@
 #!/bin/sh
 scripts=(https://raw.github.com/rcmdnk/evernote_mail/master/bin/evernote_mail)
-if [ $prefix = "" ];then
+if [ "$prefix" = "" ];then
   prefix=/usr/local
 fi
 
