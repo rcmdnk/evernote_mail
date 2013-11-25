@@ -3,29 +3,21 @@
 # Send note to Evernote by email
 
 # Constant values
-TAGMARK="#"
-NOTEBOOKMARK="@"
+readonly TAGMARK="#"
+readonly NOTEBOOKMARK="@"
+readonly DEF_TITLE="By email"
 
-# Default values
-def_attach=false
-def_inputfile=""
-def_address=""
-def_addressother=""
-def_title="By email"
-def_tag=""
-def_notebook=""
-
-# set default values
-attach=$def_attach
-inputfile=$def_inputfile
-address=$def_address
-addressother=$def_addressother
-title=$def_title
-tag=$def_tag
-notebook=$def_notebook
+# Set default values
+attach=false
+inputfile=""
+address=""
+addressother=""
+title=$DEF_TITLE
+tag=""
+notebook=""
 cmd=""
 
-# check evernote setting
+# Check evernote setting
 if [ -f ~/.evernote ];then
   addresstmp=`grep ADDRESS ~/.evernote|cut -d= -f2`
   addressothertmp=`grep ADDRESSOTHER ~/.evernote|cut -d= -f2`
@@ -37,7 +29,7 @@ if [ -f ~/.evernote ];then
   fi
 fi
 
-# help
+# Help
 HELP="Usage: $0 [-uh] [-c <command>] [-f <input file>] [-a <email address>]
                 [-o <other mail address>] [-t <title>] [-T <tag>]
                 [-n <notebook>] message...
@@ -47,13 +39,13 @@ Arguments:
       -u  Send an input file as attachment
           (default: file's content is sent as an inline text)
       -f  Set an input file, in which the contents is sent
-          (default: ${def_inputfile})
-      -a  Set an email adress (default: ${def_address})
-      -o  Set other email adress for check (default: ${def_addressother})
-      -t  Set a title (default: ${def_title} or inputFile if available)
-      -T  Set a tag (default: ${def_tag} ) + email (always added)
+          (default: ${inputfile})
+      -a  Set an email adress (default: ${address})
+      -o  Set other email adress for check (default: ${addressother})
+      -t  Set a title (default: ${title} or inputFile if available)
+      -T  Set a tag (default: ${tag} ) + email (always added)
           To put multiple tags, use like -T \"#tag1 #tag2 #tag3\"
-      -n  Set a notebook (default: ${def_notebook} )
+      -n  Set a notebook (default: ${notebook} )
       -h  Print Help (this message) and exit
 
  message  Be sent as a message
@@ -70,7 +62,7 @@ Note: 50 mails can be sent as a standard user.
      250 mails can be sent as a premium user.
 "
 
-# check arguments
+# Check arguments
 if [ $# -eq 0 ];then
   echo "$HELP" 1>&2
   exit
@@ -112,7 +104,7 @@ fi
 
 # Set title if necessary
 message="$*"
-if [ "$title" = "$def_title" ] && [ "$inputfile" != "" ];then
+if [ "$title" = "$DEF_TITLE" ] && [ "$inputfile" != "" ];then
   title=$inputfile
 fi
 
