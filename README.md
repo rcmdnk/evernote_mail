@@ -74,5 +74,3 @@ Or, simply download scripts and set where you like.
 # References
 
 * [コマンドラインからEvernoteへ送るスクリプト](http://rcmdnk.github.io/blog/2013/05/23/computer-evernote/)
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rcmdnk/evernote_mail/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
