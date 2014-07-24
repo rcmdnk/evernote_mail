@@ -52,7 +52,7 @@ if [ -f ~/.evernote ];then
 fi
 
 # Help
-HELP="Usage: $0 [-uh] [-c <command>] [-f <input file>] [-a <email address>]
+HELP="Usage: $(basename $0) [-uh] [-c <command>] [-f <input file>] [-a <email address>]
                 [-o <other mail address>] [-t <title>] [-T <tag>]
                 [-n <notebook>] message...
 
@@ -83,10 +83,9 @@ Please specify it in .evernote or use -a.
 Note: 50 mails can be sent as a standard user.
      250 mails can be sent as a premium user.
 "
-
 # Check arguments
 if [ $# -eq 0 ];then
-  echo "$HELP" 1>&2
+  echo "$HELP"|${PAGER:-less} 1>&2
   exit
 fi
 
@@ -102,8 +101,8 @@ while getopts uf:a:c:o:t:T:n:h OPT;do
     "t" ) title="$OPTARG" ;;
     "T" ) tag="$OPTARG" ;;
     "n" ) notebook="$OPTARG" ;;
-    "h" ) echo "$HELP" 1>&2; exit ;;
-    * ) echo "$HELP" 1>&2; exit ;;
+    "h" ) echo "$HELP"|${PAGER:-less} 1>&2; exit 0;;
+    * ) echo "Check \"$(basename $0) -h\" for further information" 1>&2; exit 1;;
   esac
 done
 shift $(($OPTIND - 1))
