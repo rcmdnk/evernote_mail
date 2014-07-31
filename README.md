@@ -56,6 +56,7 @@ Or, simply download scripts and set where you like.
           -T  Set a tag (default:  ) + email (always added)
               To put multiple tags, use like -T "#tag1 #tag2 #tag3"
           -n  Set a notebook (default:  )
+          -v  Show version
           -h  Print Help (this message) and exit
     
      message  Be sent as a message

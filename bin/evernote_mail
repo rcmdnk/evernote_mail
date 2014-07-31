@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
-# evernote.sh
-# Send note to Evernote by email
+
+# Description {{{
+#
+# Script to send file/comment to evernote by a mail
+#
+# Usage: $(basename $0) [-uh] [-c <command>] [-f <input file>] [-a <email address>]
+#                [-o <other mail address>] [-t <title>] [-T <tag>]
+#                [-n <notebook>] message...
+#
+EVERNOTE_MAIL_VERSION=v0.0.4
+EVERNOTE_MAIL_DATE="31/Jul/2014"
+#
+# }}}
 
 #The MIT License (MIT) {{{
 #
@@ -68,6 +79,7 @@ Arguments:
       -T  Set a tag (default: ${tag} ) + email (always added)
           To put multiple tags, use like -T \"#tag1 #tag2 #tag3\"
       -n  Set a notebook (default: ${notebook} )
+      -v  Show version
       -h  Print Help (this message) and exit
 
  message  Be sent as a message
@@ -90,7 +102,7 @@ if [ $# -eq 0 ];then
 fi
 
 OPTNUM=0
-while getopts uf:a:c:o:t:T:n:h OPT;do
+while getopts uf:a:c:o:t:T:n:vh OPT;do
   OPTNUM=`expr $OPTNUM + 1`
   case $OPT in
     "c" ) cmd="$OPTARG" ;;
@@ -101,6 +113,7 @@ while getopts uf:a:c:o:t:T:n:h OPT;do
     "t" ) title="$OPTARG" ;;
     "T" ) tag="$OPTARG" ;;
     "n" ) notebook="$OPTARG" ;;
+    "v" ) echo "$(basename $0) $EVERNOTE_MAIL_VERSION $EVERNOTE_MAIL_DATE" 1>&2; exit 0;;
     "h" ) echo "$HELP"|${PAGER:-less} 1>&2; exit 0;;
     * ) echo "Check \"$(basename $0) -h\" for further information" 1>&2; exit 1;;
   esac
@@ -116,11 +129,14 @@ if [ "$addressother" != "" ];then
   address=${address},${addressother}
 fi
 if [ "$cmd" = "" ];then
-  if [[ "$OSTYPE" =~ "cygwin" ]];then
+  if type mail >& /dev/null;then
+    cmd="mail"
+  elif type email >& /dev/null;then
     cmd="email"
   else
-    cmd="mail"
-  fi 
+    echo "No mail command was found (mail nor email)"
+    exit 1
+  fi
 fi
 
 # Set title if necessary
