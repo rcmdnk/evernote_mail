@@ -115,7 +115,10 @@ while getopts uf:a:c:o:t:T:n:vh OPT;do
     "n" ) notebook="$OPTARG" ;;
     "v" ) echo "$(basename $0) $EVERNOTE_MAIL_VERSION $EVERNOTE_MAIL_DATE" 1>&2; exit 0;;
     "h" ) echo "$HELP"|${PAGER:-less} 1>&2; exit 0;;
-    * ) echo "Check \"$(basename $0) -h\" for further information" 1>&2; exit 1;;
+    * )
+      echo "$(basename $0) $OPT: unknown argument
+Check \"$(basename $0) -h\" for further information" 1>&2; exit 1;
+      ;;
   esac
 done
 shift $(($OPTIND - 1))
