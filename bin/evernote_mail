@@ -52,8 +52,8 @@ cmd=""
 
 # Check evernote setting
 if [ -f ~/.evernote ];then
-  addresstmp=$(grep ADDRESS ~/.evernote|cut -d= -f2)
-  addressothertmp=$(grep ADDRESSOTHER ~/.evernote|cut -d= -f2)
+  addresstmp=$(grep ADDRESS ~/.evernote|cut -d= -f2|tr "\n" ,|tr "\r" ,|sed "s/,$//")
+  addressothertmp=$(grep ADDRESSOTHER ~/.evernote|cut -d= -f2|tr "\n" ,|tr "\r" ,|sed "s/,$//")
   if [ "$addresstmp" != "" ];then
     address=$addresstmp
   fi

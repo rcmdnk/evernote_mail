@@ -3,7 +3,7 @@ evernote_mail
 
 Script to send files/comments to Evernote by a mail.
 
-# Installation
+## Installation
 
 On Mac, you can install scripts by [Homebrew](https://github.com/mxcl/homebrew):
 
@@ -39,7 +39,7 @@ If you want to install other directory, do like:
 
 Or, simply download scripts and set where you like.
 
-# Usage
+## Usage
 
     evernote_mail [-uh] [-f <input file>] [-a <email address>]
                     [-o <other mail address>] [-t <title>] [-T <tag>]
@@ -72,6 +72,6 @@ Or, simply download scripts and set where you like.
     Note: 50 mails can be sent as a standard user.
          250 mails can be sent as a premium user.
 
-# References
+## References
 
 * [コマンドラインからEvernoteへ送るスクリプト](http://rcmdnk.github.io/blog/2013/05/23/computer-evernote/)
