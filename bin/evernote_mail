@@ -95,9 +95,18 @@ Please specify it in .evernote or use -a.
 Note: 50 mails can be sent as a standard user.
      250 mails can be sent as a premium user.
 "
+
+print_help () {
+  if [ -t 1 ];then
+    echo "$HELP"|${PAGER:-less}
+  else
+    echo "$HELP"
+  fi
+}
+
 # Check arguments
 if [ $# -eq 0 ];then
-  echo "$HELP"|${PAGER:-less} 1>&2
+  print_help
   exit
 fi
 
@@ -114,7 +123,7 @@ while getopts uf:a:c:o:t:T:n:vh OPT;do
     "T" ) tag="$OPTARG" ;;
     "n" ) notebook="$OPTARG" ;;
     "v" ) echo "$(basename "$0") $EVERNOTE_MAIL_VERSION $EVERNOTE_MAIL_DATE" 1>&2; exit 0;;
-    "h" ) echo "$HELP"|${PAGER:-less} 1>&2; exit 0;;
+    "h" ) print_help; exit 0;;
     * )
       echo "$(basename "$0") $OPT: unknown argument
 Check \"$(basename "$0") -h\" for further information" 1>&2; exit 1;
@@ -125,7 +134,7 @@ shift $((OPTIND - 1))
 
 # Check address
 if [ "$address" = "" ];then
-  echo "$HELP" 1>&2
+  print_help
   exit
 fi
 if [ "$addressother" != "" ];then
