@@ -8,14 +8,14 @@
 #                [-o <other mail address>] [-t <title>] [-T <tag>]
 #                [-n <notebook>] message...
 #
-EVERNOTE_MAIL_VERSION=v0.0.4
-EVERNOTE_MAIL_DATE="31/Jul/2014"
+EVERNOTE_MAIL_VERSION=v0.0.6
+EVERNOTE_MAIL_DATE="21/Aug/2018"
 #
 # }}}
 
 #The MIT License (MIT) {{{
 #
-#Copyright (c) 2013-2014 rcmdnk
+#Copyright (c) 2013 rcmdnk
 #
 #Permission is hereby granted, free of charge, to any person obtaining a copy of
 #this software and associated documentation files (the "Software"), to deal in
